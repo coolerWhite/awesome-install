@@ -1,0 +1,3 @@
+---
+# defaults file for role/timedate
+timezone_set: Europe/Moscow

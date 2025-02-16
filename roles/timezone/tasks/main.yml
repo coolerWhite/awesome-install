@@ -1,0 +1,10 @@
+---
+# tasks file for role/timedate
+- name: Check is Timezone in host
+  ansible.builtin.shell: cat /etc/timezone
+  register: timezone_hosts
+
+- name: Set Timezone in host
+  community.general.timezone:
+    name: '{{ timezone_set }}'
+  when: timezone_hosts != timezone_set

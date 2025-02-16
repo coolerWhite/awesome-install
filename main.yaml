@@ -1,0 +1,8 @@
+---
+- name: Start playbook
+  gather_facts: false
+  hosts: test
+  tasks:
+    - name: Timedate change
+      ansible.builtin.include_role:
+        name: timezone
