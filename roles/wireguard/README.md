@@ -1,38 +1,72 @@
 Role Name
-=========
+# WireGuard VPN install
 
-A brief description of the role goes here.
+## DEFAULTS
+Указанны значения по умолчанию
 
-Requirements
-------------
+## TASKS
+Генерация ключей
+```
+create_keys.yaml
+```
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+Основной файл запуска
+```
+main.yml
+```
 
-Role Variables
---------------
+Файл сохранения ключей и конфигураций 
+```
+save_files.yaml
+```
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+## TEMPLATE
+Динамическое создание конфига пользователя и сохранение локально через перменную `wg_conf_dir`
+```
+user.conf.j2
+```
 
-Dependencies
-------------
+Динамическое создание конфига сервиса `wg-quick@wg0.service`
+```
+wg0.conf.j2
+```
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+## VAR
+### Server
+IP по умолчанию для сервера
+```
+wireguard_server_interface_addr
+```
+PORT по умолчанию для сервера
+```
+wireguard_server_interface_port
+```
+Приватный ключ сервера
+```
+wireguard_private_key
+```
 
-Example Playbook
-----------------
+### User
+IP по умолчанию для пользователя
+```
+wireguard_user_interface_addr
+```
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+DNS по умолчанию
+```
+wireguard_user_interface_dns
+```
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+Диапазон IP отправленые в WG
+```
+wireguard_allowedips
+```
 
-License
--------
+Локальное место хранения сгенерированного конфига
+```
+wireguard_local_conf_dir
+```
 
-BSD
-
-Author Information
-------------------
-
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+## Experemental
+### FILES
+Есть два скрипта для генерации, но они не используются в роли

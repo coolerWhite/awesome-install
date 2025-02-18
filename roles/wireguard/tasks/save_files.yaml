@@ -1,0 +1,43 @@
+---
+# Save files
+- name: Save to local server private key
+  ansible.builtin.copy:
+    content: "{{ wireguard_server_private_key.stdout }}"
+    dest: "{{ wireguard_local_conf_dir }}/private.key"
+    mode: "0600"
+  delegate_to: localhost
+  become: false
+
+- name: Save to local server public key
+  ansible.builtin.copy:
+    content: "{{ wireguard_server_public_key.stdout }}"
+    dest: "{{ wireguard_local_conf_dir }}/public.key"
+    mode: "0600"
+  delegate_to: localhost
+  become: false
+
+- name: Save to local user private key
+  ansible.builtin.copy:
+    content: "{{ wireguard_user_private_key.stdout }}"
+    dest: "{{ wireguard_local_conf_dir }}/user-priv.key"
+    mode: "0600"
+  delegate_to: localhost
+  become: false
+
+- name: Save to local user public key
+  ansible.builtin.copy:
+    content: "{{ wireguard_user_public_key.stdout }}"
+    dest: "{{ wireguard_local_conf_dir }}/user-pub.key"
+    mode: "0600"
+  delegate_to: localhost
+  become: false
+
+- name: Save to local user conf
+  ansible.builtin.template:
+    src: "user.conf.j2"
+    dest: "{{ wireguard_local_conf_dir }}/user.conf"
+    backup: true
+    mode: "0600"
+  delegate_to: localhost
+  become: false
+

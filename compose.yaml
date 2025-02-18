@@ -1,8 +1,0 @@
-services:
-  ansible:
-    container_name: ansible
-    image: alpine/ansible
-    volumes:
-      - type: bind
-        source: .
-        target: /main

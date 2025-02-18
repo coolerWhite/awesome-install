@@ -1,2 +1,61 @@
 ---
-# tasks file for roles/wireguard
+- name: Install WireGuard
+  ansible.builtin.apt:
+    name:
+      - wireguard
+    state: present
+
+- name: Add IPv4 Forwarding
+  ansible.posix.sysctl:
+    name: net.ipv4.ip_forward
+    value: "1"
+    sysctl_set: true
+    state: present
+    reload: true
+
+- name: Create local dir for files
+  ansible.builtin.file:
+    path: "{{ wireguard_local_conf_dir }}"
+    state: directory
+    mode: "0700"
+  delegate_to: localhost
+  become: false
+
+- name: Check keys directory
+  ansible.builtin.stat:
+    path: "/etc/wireguard/keys/"
+  register: keys_dir_exist
+
+- name: Create keys at server
+  ansible.builtin.file:
+    path: "/etc/wireguard/keys/"
+    state: directory
+    mode: "0700"
+  register: create_keys_dir
+  when: not keys_dir_exist.stat.exists
+
+- name: Create keys
+  ansible.builtin.import_tasks: create_keys.yaml
+  when: create_keys_dir is changed
+  notify:
+    - Restart service
+
+- name: Save local files
+  ansible.builtin.import_tasks: save_files.yaml
+  when: create_keys_dir is changed
+
+- name: Create wg conf
+  ansible.builtin.template:
+    src: "wg0.conf.j2"
+    dest: "/etc/wireguard/wg0.conf"
+    mode: "0600"
+  when: create_keys_dir is changed
+  notify:
+    - Restart service
+
+- name: Start WireGuard service
+  ansible.builtin.systemd:
+    name: wg-quick@wg0
+    state: started
+    enabled: true
+    daemon_reload: true
