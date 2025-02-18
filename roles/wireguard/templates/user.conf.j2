@@ -1,0 +1,12 @@
+{% for host in groups ['wireguard'] %}
+[Interface]
+PrivateKey = {{ wireguard_user_private_key.stdout }}
+Address = {{ wireguard_user_interface_addr }}
+DNS = {{ wireguard_user_interface_dns }}
+
+[Peer]
+PublicKey = {{ wireguard_server_public_key.stdout }}
+AllowedIPs = {{ wireguard_allowedips }}
+Endpoint = {{ hostvars[host]['ansible_all_ipv4_addresses'][0] }}:{{ wireguard_server_interface_port }}
+PersistentKeepalive = 15
+{% endfor %}

@@ -1,0 +1,18 @@
+---
+# SERVER
+- name: Generate-Keys | Server private key
+  ansible.builtin.command: wg genkey
+  register: wireguard_server_private_key
+
+- name: Generate-Keys | Server public key
+  ansible.builtin.shell: echo "{{ wireguard_server_private_key.stdout }}" | wg pubkey
+  register: wireguard_server_public_key
+
+# USER
+- name: Generate-Keys | User private key
+  ansible.builtin.command: wg genkey
+  register: wireguard_user_private_key
+
+- name: Generate-Keys | User public key
+  ansible.builtin.shell: echo "{{ wireguard_user_private_key.stdout }}" | wg pubkey
+  register: wireguard_user_public_key

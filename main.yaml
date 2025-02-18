@@ -1,8 +1,8 @@
 ---
 - name: Start playbook
-  gather_facts: false
-  hosts: test
+  gather_facts: true
+  hosts: all
   tasks:
-    - name: Timedate change
-      ansible.builtin.include_role:
-        name: timezone
+    - name: Install wireguard
+      ansible.builtin.import_role:
+        name: wireguard

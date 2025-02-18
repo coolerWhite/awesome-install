@@ -1,2 +1,8 @@
 ---
 # handlers file for roles/wireguard
+- name: Restart service
+  ansible.builtin.systemd:
+    name: wg-quick@wg0
+    state: restarted
+    enabled: true
+    daemon_reload: true
