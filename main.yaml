@@ -3,10 +3,10 @@
   gather_facts: true
   hosts: all
   tasks:
-    # - name: Install wireguard
-    #   ansible.builtin.import_role:
-    #     name: wireguard
-    #   tags: wg
+    - name: Install wireguard
+      ansible.builtin.import_role:
+        name: wireguard
+      tags: wg
 
     - name: Confit system
       ansible.builtin.import_role:
