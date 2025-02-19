@@ -1,12 +1,12 @@
 ---
 # vars file for roles/wireguard
-wireguard_server_interface_addr: "{{ server_interface_addr }}"
-wireguard_server_interface_port: "{{ server_interface_port }}"
+wireguard_server_interface_addr: ""
+wireguard_server_interface_port: ""
 
-wireguard_private_key: "{{ wireguard_server_private_key.stdout }}"
+wireguard_private_key: "{{ wireguard_server_private_key }}"
 
-wireguard_user_interface_addr: "{{ user_interface_addr }}"
-wireguard_user_interface_dns: "{{ user_interface_dns }}"
-wireguard_allowedips: "{{ allowedIPs }}"
+wireguard_user_interface_addr: ""
+wireguard_user_interface_dns: ""
+wireguard_allowedips: ""
 
-wireguard_local_conf_dir: "{{ wg_conf_dir }}"
+wireguard_local_conf_dir: ""
