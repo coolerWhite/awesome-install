@@ -1,0 +1,10 @@
+# Update repository and upgrade
+system_update_repository: true
+system_upgrade: true
+
+# App list
+## Set true if need install apps
+system_install_apps: false
+system_app_name:
+  - neofetch
+  - mc
