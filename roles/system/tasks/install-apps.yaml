@@ -1,0 +1,7 @@
+---
+- name: Install Apps
+  ansible.builtin.apt:
+    name:
+      - "{{ item }}"
+    state: present
+  loop: "{{ system_app_name }}"

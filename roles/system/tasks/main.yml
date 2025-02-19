@@ -1,2 +1,15 @@
 ---
 # tasks file for roles/system
+- name: Update system
+  ansible.builtin.apt:
+    update_cache: true
+  when: system_update_repository | default(false) | bool
+
+- name: Upgrade system
+  ansible.builtin.apt:
+    upgrade: true
+  when: system_upgrade | default(false) | bool
+
+- name: Install apps
+  ansible.builtin.import_tasks: install-apps.yaml
+  when: system_install_apps | default(false) | bool

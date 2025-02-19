@@ -1,2 +1,7 @@
 ---
 # vars file for roles/system
+system_update_repository: false
+system_upgrade: false
+
+system_install_apps: false
+system_app_name: ""
