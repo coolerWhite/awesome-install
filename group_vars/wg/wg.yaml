@@ -1,11 +1,11 @@
 # WireGuard env
 ### Server 
-server_interface_addr: "10.200.40.1/24"
-server_interface_port: 55555
+wireguard_server_interface_addr: "10.200.40.1/24"
+wireguard_server_interface_port: 55555
 
 ### User
-user_interface_addr: "10.200.40.2/32"
-user_interface_dns: "1.1.1.1"
-allowedIPs: "0.0.0.0/0"
+wireguard_user_interface_addr: "10.200.40.2/32"
+wireguard_user_interface_dns: "1.1.1.1"
+wireguard_allowedips: "0.0.0.0/0"
 
-wg_conf_dir: "~/wireguard"
+wireguard_local_conf_dir: "~/wireguard"
