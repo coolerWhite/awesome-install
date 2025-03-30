@@ -3,3 +3,6 @@
 awesome
 myhome.ini
 test/*
+
+#
+group_vars/my
